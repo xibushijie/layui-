@@ -1,0 +1,5 @@
+
+/* 背景色 */
+.layui-layout-admin .layui-header, .layui-nav .layui-nav-child a:hover, .layui-nav .layui-nav-child dd.layui-this a:hover {
+    background-color: #15BE9F
+}

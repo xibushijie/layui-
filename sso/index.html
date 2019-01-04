@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>后台管理</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Access-Control-Allow-Origin" content="*">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="icon" href="face.ico">
+	<link rel="stylesheet" href="../public/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="../public/layui/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./css/index.css" media="all" />
+	<link rel="stylesheet" href="../public/css/skin/green.css">
+</head>
+
+<body class="main_body">
+	<div class="layui-layout layui-layout-admin">
+		<!-- 顶部 -->
+		<div class="layui-header header">
+			<div class="layui-main mag0">
+				<a href="#" class="logo">管理后台</a>
+				<!-- 显示/隐藏菜单 -->
+				<!-- <a href="javascript:;" class="seraph hideMenu fa fa-sliders"></a> -->
+				<!-- 顶级菜单 -->
+				<ul class="layui-nav mobileTopLevelMenus" mobile>
+					<li class="layui-nav-item" data-menu="contentManagement">
+						<a href="javascript:;"><i class="seraph icon-caidan"></i><cite>紫云智慧</cite></a>
+						<dl class="layui-nav-child ">
+							<dd class="layui-this" data-menu="contentManagement"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe63c;">&#xe63c;</i><cite>卡务管理</cite></a></dd>
+							<dd data-menu="memberCenter"><a href="javascript:;"><i class="seraph icon-icon10" data-icon="icon-icon10"></i><cite>用户中心</cite></a></dd>
+							<dd data-menu="systemeSttings"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe620;">&#xe620;</i><cite>系统设置</cite></a></dd>
+							<dd data-menu="seraphApi"><a href="javascript:;"><i class="layui-icon" data-icon="&#xe705;">&#xe705;</i><cite>使用文档</cite></a></dd>
+						</dl>
+					</li>
+				</ul>
+				<ul class="layui-nav topLevelMenus" pc>
+
+				</ul>
+				<!-- 顶部右侧菜单 -->
+				<ul class="layui-nav top_menu">
+					<!-- <li class="layui-nav-item" pc>
+						<a href="javascript:;" class="clearCache"><i class="layui-icon" data-icon="&#xe640;">&#xe640;</i><cite>清除缓存</cite><span class="layui-badge-dot"></span></a>
+					</li> -->
+					<li class="layui-nav-item pwdEdit">
+						<a href="javascript:;"><i class="fa fa-unlock"></i><cite>修改密码</cite></a>
+					</li>
+					<li class="layui-nav-item" id="userInfo">
+						<a href="javascript:;"><img src="../public/images/face.png" class="layui-nav-img userAvatar" width="35" height="35"><cite
+							 class="adminName"></cite></a>
+						<dl class="layui-nav-child">
+							<dd><a class="signOut"><i class="seraph fa fa-sign-out"></i><cite>退出登录</cite></a></dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- 左侧导航 -->
+		<div class="layui-side layui-bg-black">
+			<div class="user-photo">
+				<a class="img" title="紫云智慧"><img src="../public/images/logo.png" class="userAvatar"></a>
+			</div>
+			<div class="navBar layui-side-scroll" id="navBar">
+				<ul class="layui-nav layui-nav-tree menuData">
+					<!-- <li class="layui-nav-item">
+						<a href="javascript:;" data-url="page/main.html"><i class="layui-icon" data-icon=""></i><cite>后1台首页</cite></a>
+					</li> -->
+				</ul>
+				<ul class="layui-nav layui-nav-tree">
+					<li class="layui-nav-item layui-nav-itemed">
+						<a href="javascript:;" data-url="../platForm/ESB/esbApplication.html" class="esbA"><i class="fa fa-sitemap"></i><cite>ESB</cite></a>
+						<dl class="layui-nav-child esb-menu">
+							<dd><a href="javascript:;" data-url="../platForm/ESB/esbApplication.html"> <i class="fa fa-cube"></i> <cite>ESB应用</cite></a></dd>
+							<dd><a href="javascript:;" data-url="../platForm/ESB/esbUserApply.html"> <i class="fa fa-cube"></i> <cite>ESB用户申请</cite></a></dd>
+							<dd><a href="javascript:;" data-url="../platForm/ESB/msgManage.html"> <i class="fa fa-cube"></i> <cite>消息管理</cite></a></dd>
+							<!-- <dd><a href="javascript:;" data-url="../platForm/ESB/esbUserApply.html"><i class="fa fa-user"></i> <cite>ESB用户申请</cite></a></dd>
+							<dd><a href="javascript:;" data-url="../platForm/ESB/thirdPartyUserManage.html"><i class="fa fa-recycle"></i> <cite>第三方用户管理</cite></a></dd> -->
+						</dl>
+					</li>
+				</ul>
+
+
+				<!-- <ul class="layui-nav layui-nav-tree">
+					<li class="layui-nav-item layui-nav-itemed">
+						<a href="javascript:;"><i class="fa fa-comment"></i><cite>消息</cite></a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;" data-url="../platForm/msg/msgRecord.html"> <i class="fa fa-comments-o"></i> <cite>消息记录</cite></a></dd>
+							<dd><a href="javascript:;" data-url="../platForm/msg/msgQueueModule.html"><i class="fa fa-inbox"></i> <cite>消息队列模块</cite></a></dd>
+						</dl>
+					</li>
+				</ul> -->
+
+			</div>
+		</div>
+		<!-- 右侧内容 -->
+		<div class="layui-body layui-form">
+			<div class="layui-tab mag0" lay-filter="bodyTab" id="top_tabs_box">
+				<ul class="layui-tab-title top_tab" id="top_tabs">
+					<li class="layui-this" lay-id=""><cite></cite></li>
+				</ul>
+				<ul class="layui-nav closeBox">
+					<li class="layui-nav-item">
+						<a href="javascript:;"><i class="layui-icon caozuo">&#xe643;</i> 页面操作</a>
+						<dl class="layui-nav-child">
+							<dd><a href="javascript:;" class="refresh refreshThis"><i class="fa fa-refresh"></i> 刷新当前</a></dd>
+							<dd><a href="javascript:;" class="closePageOther"><i class="fa fa-minus-circle"></i> 关闭其他</a></dd>
+							<dd><a href="javascript:;" class="closePageAll"><i class="fa fa-remove"></i> 关闭全部</a></dd>
+						</dl>
+					</li>
+				</ul>
+				<div class="layui-tab-content clildFrame">
+					<div class="layui-tab-item layui-show">
+						<iframe src=""></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 底部 -->
+		<div class="layui-footer footer">
+			<p><span>copyright @ <span class="year"></span> 河南紫云智慧城市运营技术服务有限公司</span></p>
+		</div>
+	</div>
+
+	<!-- 移动导航 -->
+	<div class="site-tree-mobile"><i class="layui-icon">&#xe602;</i></div>
+	<div class="site-mobile-shade"></div>
+
+	<!-- 修改密码弹框 -->
+	<form class="layui-form f-dn pwdBox">
+		<div class="layui-form-item mt15">
+			<label class="layui-form-label">原密码</label>
+			<div class="layui-input-inline">
+				<input type="hidden" name="id">
+				<input type="password" name="password" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">新密码</label>
+			<div class="layui-input-inline">
+				<input type="password" name="newPassword" required lay-verify="required" placeholder="请输入新密码" autocomplete="off"
+				 class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label"></label>
+			<div class="layui-input-inline">
+				<button type="button" class="layui-btn" lay-submit lay-filter="editPwdBtn">立即提交</button>
+			</div>
+		</div>
+	</form>
+
+	<script type="text/javascript" src="../public/layui/layui.js"></script>
+	<script type="text/javascript" src="../sso/js/index.js"></script>
+	<script type="text/javascript" src="../public/js/cache.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>菜单管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../public/layui/css/layui.css" media="all" />
+    <style>
+        .layui-form-label {width: 95px;}
+        .layui-table .layui-icon {color: #333;}
+    </style>
+</head>
+
+<body class="childrenBody">
+    <form class="layui-form">
+        <blockquote class="layui-elem-quote quoteBox">
+            <form class="layui-form">
+                <!-- <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input searchVal" placeholder="请输入搜索的菜单名称" />
+                    </div>
+                    <a class="layui-btn search_btn" data-type="reload">搜索</a>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn">批量删除</a>
+                </div> -->
+            </form>
+            <div class="layui-inline"><button class="layui-btn layui-btn-normal" id="btn-add" type="button"><i class="layui-icon layui-icon-search"></i>添加一级菜单</button></div>
+            <div class="layui-inline"><button class="layui-btn" id="btn-fold" type="button"><i class="layui-icon layui-icon-right"></i>折叠</button></div>
+        </blockquote>
+    </form>
+
+    <table id="auth-table" class="layui-table" lay-filter="auth-table"></table>
+
+    <script type="text/html" id="auth-state">
+
+        {{# if(d.privilegeLevel < 3) { }}
+            <a class="layui-btn layui-btn-sm layui-btn-xs layui-btn-normal layers" lay-event="add" layers="0">添加子菜单</a>
+        {{# } }}
+        
+        <a class="layui-btn layui-btn-sm layui-btn-xs" id="edit" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-sm layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+    </script>
+
+    <!-- 添加菜单弹框 -->
+    <form class="layui-form f-dn addBox" layEvent="addBox">
+        <div class="layui-form-item mt15">
+            <label class="layui-form-label">菜单名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="privilegeName" required lay-verify="required" placeholder="请输入菜单名称"
+                    autocomplete="off" class="layui-input ">
+            </div>
+        </div>
+        <input type="hidden" name="privilegeLink" value="plarForm/menuManage.html">
+        <input type="hidden" name="privilegeIcon" value="fa">
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择应用包</label>
+            <div class="layui-input-inline">
+                <select name="applicationPackageId" class="appPackageSelect"></select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-inline">
+                <input type="number" name="privilegeSort" required lay-verify="required" placeholder="请输入排序编号"
+                    autocomplete="off" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-inline">
+                <input type="text" name="remark" required lay-verify="required" placeholder="请输入备注" autocomplete="off"
+                    class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限id</label>
+            <div class="layui-input-inline">
+                <input type="text" name="shiroId" required lay-verify="required" placeholder="请输入备注" autocomplete="off"
+                    class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" lay-submit lay-filter="formBtn">立即提交</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- 编辑菜单弹框 -->
+    <form class="layui-form f-dn editBox">
+        <div class="layui-form-item mt15">
+            <label class="layui-form-label">应用包名称</label>
+            <div class="layui-input-inline">
+                <select name="applicationPackageId" disabled="disabled" class="appPackageSelect layui-btn-disabled"></select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">父级菜单名称</label>
+            <div class="layui-input-inline">
+                <input type="hidden" name="id">
+                <input type="text" name="parentPrivilegeName" readonly='readonly' placeholder="请输入菜单名称" class="layui-input layui-btn-disabled">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单名称</label>
+            <div class="layui-input-inline">
+                <input type="hidden" name="id">
+                <input type="text" name="privilegeName" required lay-verify="required" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-inline">
+                <input type="number" name="privilegeSort" required lay-verify="required" placeholder="请输入排序编号"
+                    autocomplete="off" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-inline">
+                <input type="text" name="remark" required lay-verify="required" placeholder="请输入备注" autocomplete="off"
+                    class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限id</label>
+            <div class="layui-input-inline">
+                <input type="text" name="shiroId" required lay-verify="required" placeholder="请输入备注" autocomplete="off"
+                    class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" lay-submit lay-filter="editBtn">立即提交</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- 添加子菜单弹框 -->
+    <form class="layui-form f-dn addMenuBox">
+        <div class="layui-form-item mt15">
+            <div class="layui-form-item mt15">
+                <label class="layui-form-label">选择应用包</label>
+                <div class="layui-input-inline">
+                    <select name="applicationPackageId" disabled="disabled" class="appPackageSelect layui-btn-disabled"></select>
+                </div>
+            </div>
+            <label class="layui-form-label">父级菜单名称</label>
+            <div class="layui-input-inline">
+                <!-- 父级菜单id -->
+                <input type="hidden" name="parentPrivilegeId">
+                <!-- 父级菜单name -->
+                <input type="text" name="parentPrivilegeName" readonly="readonly" class="layui-input layui-btn-disabled ">
+            </div>
+        </div>
+        <input type="hidden" name="privilegeLink" value="plarForm/menuManage.html">
+        <input type="hidden" name="privilegeIcon" value="fa">
+        <div class="layui-form-item mt15">
+            <label class="layui-form-label">菜单名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="privilegeName" required lay-verify="required" placeholder="请输入菜单名称"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-inline">
+                <input type="number" name="privilegeSort" required lay-verify="required" placeholder="请输入排序编号"
+                    autocomplete="off" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-inline">
+                <input type="text" name="remark" required lay-verify="required" placeholder="请输入备注" autocomplete="off"
+                    class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限id</label>
+            <div class="layui-input-inline">
+                <input type="text" name="shiroId" required lay-verify="required" placeholder="请输入备注" autocomplete="off"
+                    class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" lay-submit lay-filter="addmenuBtn">立即提交</button>
+            </div>
+        </div>
+    </form>
+
+    <script type="text/javascript" src="../public/layui/layui.js"></script>
+    <script type="text/javascript" src="js/menuManage.js"></script>
+    <script src="js/commonFn.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+{
+	"contentManagement": [
+		{
+			"title": "菜单管理",
+			"icon": "&#xe634;",
+			"href": "../platForm/menuManage.html"
+		},
+		{
+			"title": "机构管理",
+			"icon": "&#xe634;",
+			"href": "../platForm/organizationManage.html"
+		},
+		{
+			"title": "应用包管理",
+			"icon": "&#xe634;",
+			"href": "../platForm/applicationPackageManage.html"
+		},
+		{
+			"title": "角色管理",
+			"icon": "&#xe634;",
+			"href": "../platForm/roleManage.html"
+		}
+	],
+	"memberCenter": [
+		{
+			"title": "卡片终端管理",
+			"icon": "&#xe612;",
+			"href": "page/user/userList.html"
+		},
+		{
+			"title": "运营管理",
+			"icon": "icon-vip",
+			"href": "page/user/userGrade.html"
+		}
+	],
+	"systemeSttings": [
+		{
+			"title": "系统基本参数",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/basicParameter.html"
+		},
+		{
+			"title": "系统日志",
+			"icon": "icon-log",
+			"href": "page/systemSetting/logs.html"
+		},
+		{
+			"title": "友情链接",
+			"icon": "&#xe64c;",
+			"href": "page/systemSetting/linkList.html"
+		},
+		{
+			"title": "图标管理",
+			"icon": "&#xe857;",
+			"href": "page/systemSetting/icons.html"
+		}
+	],
+	"seraphApi": [
+		{
+			"title": "终端数据",
+			"icon": "icon-mokuai",
+			"href": "page/doc/addressDoc.html"
+		},
+		{
+			"title": "db数据",
+			"icon": "icon-mokuai",
+			"href": "page/doc/bodyTabDoc.html"
+		},
+		{
+			"title": "服务管理",
+			"icon": "icon-mokuai",
+			"href": "page/doc/navDoc.html"
+		}
+	]
+}

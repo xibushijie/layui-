@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ESB用户申请</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../../public/layui/css/layui.css" media="all" />
+    <style>
+        .layui-form-label {width: 100px;}
+    </style>
+</head>
+
+<body class="childrenBody">
+    <form class="layui-form">
+        <blockquote class="layui-elem-quote quoteBox">
+            <form class="layui-form">
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input searchVal" placeholder="请输入搜索的ESB用户" />
+                    </div>
+                    <a class="layui-btn search_btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>搜索</a>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn layui-btn-normal addNews_btn"><i class="layui-icon layui-icon-add-circle"></i>申请ESB用户</a>
+                </div>
+                <!-- <div class="layui-inline">
+                    <a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn">批量删除</a>
+                </div> -->
+            </form>
+        </blockquote>
+
+        <table id="esbList" lay-filter="esbList"></table>
+
+        <!--操作-->
+        <script type="text/html" id="esbListBar">
+            <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="review">审核</a>
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+			<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+		</script>
+    </form>
+
+    <!-- 申请ESB用户弹框 -->
+    <form class="layui-form f-dn addBox">
+        <div class="layui-form-item mt15">
+            <label class="layui-form-label">ESB用户名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="esbApplyUserName" required lay-verify="required" placeholder="请输入ESB用户名"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">ESB机构名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="esbApplyInstitution" required lay-verify="required" placeholder="请输入ESB机构名称"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请描述</label>
+            <div class="layui-input-inline">
+                <input type="text" name="esbApplyMessage" required lay-verify="required" placeholder="请输入申请描述" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请appid</label>
+            <div class="layui-input-inline">
+                <input type="text" name="esbApplyAppId" required lay-verify="required" placeholder="申请appid" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" lay-submit lay-filter="editBtn">立即提交</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- 编辑ESB应用弹框 -->
+    <form class="layui-form f-dn editBox">
+        <div class="layui-form-item mt15">
+            <label class="layui-form-label">ESB应用名称</label>
+            <div class="layui-input-inline">
+                <!-- 应用id -->
+                <input type="hidden" name="applicationId">
+                <!-- 应用父id -->
+                <input type="hidden" name="applicationParent">
+                <input type="text" name="applicationName" required lay-verify="required" placeholder="请输入ESB应用名称"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">ESB应用图片url</label>
+            <div class="layui-input-inline">
+                <input type="text" name="imgURL" required lay-verify="required" placeholder="请输入ESB应用名称" autocomplete="off"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" lay-submit lay-filter="editBtn">立即提交</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- 授权弹框 -->
+    <!-- 树形菜单 -->
+    <div class="gaveBox f-dn">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择权限</label>
+                <div class="layui-input-inline">
+                    <!-- 角色名字 -->
+                    <input type="hidden" name="roleDesc">
+                    <!-- 角色id -->
+                    <input type="hidden" name="id" id="roleId">
+                    <!-- 菜单ids -->
+                    <input type="hidden" name="sysPrivilegeIds" />
+                    <div id="LAY-auth-tree-convert-index"></div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-inline">
+                    <button type="button" class="layui-btn" lay-submit lay-filter="gaveBtn">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript" src="../../public/layui/layui.js"></script>
+    <script type="text/javascript" src="js/esbUserApply.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+.shouquan {
+    padding-left: 125px;
+    margin-bottom: 15px;
+}
+
+.shouquan div.layui-unselect {
+    margin-bottom: 10px;
+}
+
+.layui-form-label {
+    width: 95px;
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>机构管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../public/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../platForm/css/platForm.css">
+</head>
+
+<body class="childrenBody">
+    <form class="layui-form">
+        <blockquote class="layui-elem-quote quoteBox">
+            <form class="layui-form">
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input searchVal" placeholder="请输入搜索的机构名称" />
+                    </div>
+                    <a class="layui-btn search_btn" data-type="reload"><i class="layui-icon layui-icon-search"></i>搜索</a>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn layui-btn-normal addNews_btn"><i class="layui-icon layui-icon-add-circle"></i>添加机构</a>
+                </div>
+                <!-- <div class="layui-inline">
+                    <a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn">批量删除</a>
+                </div> -->
+            </form>
+        </blockquote>
+
+        <table id="menuList" lay-filter="menuList"></table>
+        <!--审核状态-->
+        <script type="text/html" id="newsStatus">
+			{{#  if(d.isEnable == "N"){ }}
+			<span class="layui-red">否</span>
+			{{#  } else if(d.isEnable == "Y"){ }}
+			<span class="layui-blue">是</span>
+			{{#  } else { }}
+            newsStatus
+			{{#  }}}
+		</script>
+
+        <!--操作-->
+        <script type="text/html" id="menuListBar">
+			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="gave">授权</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+		</script>
+    </form>
+
+    <!-- 添加机构菜单弹框 -->
+    <form class="layui-form f-dn addBox">
+        <div class="layui-form-item mt15">
+            <label class="layui-form-label">机构名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="mechanismName" required lay-verify="required" placeholder="请输入机构名称"
+                    autocomplete="off" class="layui-input userName">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">机构代码</label>
+            <div class="layui-input-inline">
+                <input type="number" name="mechanismCode" required lay-verify="required" placeholder="请输入机构代码"
+                    autocomplete="off" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">机构网点</label>
+            <div class="layui-input-inline">
+                <input type="text" name="network" placeholder="请输入数据库密码" class="layui-input ">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" lay-submit lay-filter="formBtn">立即提交</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- 修改机构弹框 -->
+    <form class="layui-form f-dn editBox">
+        <div class="layui-form-item mt15">
+            <label class="layui-form-label">机构名称</label>
+            <div class="layui-input-inline">
+                <input type="hidden" name="id">
+                <input type="text" name="mechanismName" required lay-verify="required" placeholder="请输入机构名称"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">机构代码</label>
+            <div class="layui-input-inline">
+                <input type="number" name="mechanismCode" required lay-verify="required" placeholder="请输入机构代码"
+                    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否可用</label>
+            <div class="layui-input-inline">
+                <select name="isEnable">
+                    <option value="Y">是</option>
+                    <option value="N">否</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">机构网点</label>
+            <div class="layui-input-inline">
+                <input type="text" name="network" placeholder="请输入机构网点" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline">
+                <button type="button" class="layui-btn" lay-submit lay-filter="editBtn">立即提交</button>
+            </div>
+        </div>
+    </form>
+
+    <script id="demo" type="text/html">
+        <form class="layui-form" lay-filter="formSq">
+            <div class="layui-input-item mt15">
+                <!-- 机构id -->
+                <input type="hidden" name="id" id="appId"> 
+                <label class="layui-form-label">选择应用</label>
+                <div class="shouquan">
+                {{#  layui.each(d, function(index, item){ }}
+                    <!-- <span>{{ item.applicationPackageName }}</span> -->
+                    <input type="checkbox" name="name" ids="{{ item.id }}" lay-skin="primary" title="{{ item.applicationName }}">
+                {{#  }); }}
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">到期时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="end_time" name="end_time" placeholder="请选择到期时间">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-inline">
+                    <button type="button" class="layui-btn" lay-submit lay-filter="gaveBtn">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </script>
+    <!-- 授权弹框 -->
+    <div id="view" class="f-dn gaveBox"></div>
+
+    <!-- 树形菜单 -->
+    <!-- <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <label for="">权限</label>
+                    <input type="text" id="roleMenu" name="roleMenu" />
+                <div id="LAY-auth-tree-convert-index"></div>
+            </div>
+        </div>
+    </form> -->
+
+    <script type="text/javascript" src="../public/layui/layui.js"></script>
+    <script type="text/javascript" src="js/organizationManage.js"></script>
+    <script src="../public/layui/laydate/laydate.js"></script>
+
+</body>
+
+</html>
